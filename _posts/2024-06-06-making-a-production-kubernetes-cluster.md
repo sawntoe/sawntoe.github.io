@@ -199,48 +199,9 @@ spec:
       env:
         - name: ALLOW
           value: 10.0.0.0/8
----
-apiVersion: v1
-kind: Pod
-metadata:
-  name: distcc-rgb3
-  namespace: distcc
-  labels:
-    app: distcc
-    node: rgb3
-spec:
-  nodeSelector:
-    kubernetes.io/hostname: rgb3
-  containers:
-    - name: distcc
-      image: rgb1:5000/distcc
-      ports:
-        - containerPort: 3632
-          protocol: TCP
-      env:
-        - name: ALLOW
-          value: 10.0.0.0/8
----
-apiVersion: v1
-kind: Pod
-metadata:
-  name: distcc-rgb4
-  namespace: distcc
-  labels:
-    app: distcc
-    node: rgb4
-spec:
-  nodeSelector:
-    kubernetes.io/hostname: rgb4
-  containers:
-    - name: distcc
-      image: rgb1:5000/distcc
-      ports:
-        - containerPort: 3632
-          protocol: TCP
-      env:
-        - name: ALLOW
-          value: 10.0.0.0/8
+.
+.
+.
 ---
 apiVersion: v1
 kind: Service
@@ -273,43 +234,12 @@ spec:
   selector:
     node: rgb2
 
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: distcc-rgb3
-  namespace: distcc
-spec:
-  type: NodePort
-  ports:
-  - name: distcc-rgb3
-    port: 8003
-    nodePort: 8003
-    targetPort: 3632
-  selector:
-    node: rgb3
-
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: distcc-rgb4
-  namespace: distcc
-spec:
-  type: NodePort
-  ports:
-  - name: distcc-rgb4
-    port: 8004
-    nodePort: 8004
-    targetPort: 3632
-  selector:
-    node: rgb4
 ```
 
 This deploys distcc to all of the nodes on my network (if you wish to run this, adapt the number of pods and the hostnames of the registry and the pods.)
 
 Running the same image locally and mounting a volume with the source code of the Linux kernel, you can export the following environment variables:
-```env
+```sh
 export DISTCC_HOSTS="host:8001/<cores> host:8002/<cores> host:8003/<cores> host:8004/<cores>"
 export PATH="/usr/lib/distcc/bin:$PATH"
 ```
