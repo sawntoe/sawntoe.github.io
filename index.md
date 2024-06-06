@@ -6,5 +6,4 @@ layout: home
 author_profile: true
 ---
 
-# sawntoe's blog
 Hi! I'm sawntoe
