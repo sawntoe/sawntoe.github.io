@@ -7,7 +7,7 @@ search: false
 
 $text-color: #ffffff;
 $body-color: #ffffff;
-$link-color: #0000FF;
+$link-color: #6666FF;
 @import "minimal-mistakes/skins/{{ site.minimal_mistakes_skin | default: 'default' }}"; // skin
 @import "minimal-mistakes"; // main partials
 
